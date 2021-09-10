@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package todoPlayground;
+
+import "google/protobuf/empty.proto";
+
+service Todo {
+	rpc GetAllTodos (google.protobuf.Empty) returns (stream TodoReply){}
+	rpc GetCompleteTodos (google.protobuf.Empty) returns (stream TodoReply){}
+	rpc GetIncompleteTodos (google.protobuf.Empty) returns (stream TodoReply){}
+	rpc GetTodoById (TodoByIdRequest) returns (TodoReply){}
+	rpc CreateTodo (CreateTodoRequest) returns (CreateTodoReply){}
+	rpc UpdateTodo (UpdateTodoRequest) returns (UpdateTodoReply) {}
+	rpc MarkComplete (TodoByIdRequest) returns (UpdateTodoReply){}
+	rpc MarkInComplete (TodoByIdRequest) returns (UpdateTodoReply){}
+	rpc DeleteTodo (TodoByIdRequest) returns (google.protobuf.Empty){}
+
+}
+
+
+
+message TodoReply
+{
+	int32 Id = 1;
+	string Title = 2;
+	bool IsComplete= 3;
+}
+
+message UpdateTodoRequest {
+	int32 Id = 1;
+	TodoRequest Todo = 2;
+}
+
+message UpdateTodoReply {
+
+}
+
+message TodoRequest
+{
+	int32 Id = 1;
+	string Title = 2;
+	bool IsComplete= 3;
+}
+
+message CreateTodoRequest
+{
+	string Title =2;
+	bool IsComplete = 3;
+}
+message CreateTodoReply
+{
+	int32 Id = 1;
+}
+
+message TodoByIdRequest
+{
+	int32 Id =1;
+}
