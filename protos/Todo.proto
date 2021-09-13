@@ -32,7 +32,7 @@ message UpdateTodoRequest {
 }
 
 message UpdateTodoReply {
-
+	bool Ok = 1;
 }
 
 message TodoRequest

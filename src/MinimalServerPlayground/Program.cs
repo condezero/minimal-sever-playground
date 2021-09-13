@@ -24,6 +24,9 @@ async Task EnsureDb(IServiceProvider services, ILogger logger)
     logger.LogInformation("Ensuring database exists and is up to date at connection string '{connectionString}'", connectionString);
 
     using var db = services.CreateScope().ServiceProvider.GetRequiredService<TodoDb>();
+
+    db.Database.EnsureCreated();
+
     await db.Database.MigrateAsync();
 }
 
